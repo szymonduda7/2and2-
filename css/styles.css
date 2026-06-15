@@ -599,27 +599,22 @@ section {
 
 .gallery__viewport {
     position: relative;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
     width: 100%;
     height: clamp(220px, 46vw, 520px);
     border-radius: var(--radius-m);
     background: #f0ede9;
     user-select: none;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
 }
-.gallery__viewport::-webkit-scrollbar { display: none; }
 
 .gallery__track {
     display: flex;
     height: 100%;
+    transition: transform 0.4s ease;
+    will-change: transform;
 }
 
 .gallery__slide {
-    scroll-snap-align: start;
     flex-shrink: 0;
     height: 100%;
     overflow: hidden;

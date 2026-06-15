@@ -208,44 +208,26 @@ sections.forEach(s => navObserver.observe(s));
 
     counter.textContent = `1 / ${total}`;
 
-    /* Pixel widths on slides — bypasses iOS flex-basis % ambiguity */
     function fixSlideWidths() {
         const w = viewport.offsetWidth;
         slides.forEach(s => { s.style.width = w + 'px'; s.style.minWidth = w + 'px'; });
     }
 
-    function syncUI(idx) {
-        current = idx;
+    function goTo(idx) {
+        current = (idx + total) % total;
+        track.style.transform = `translateX(-${current * viewport.offsetWidth}px)`;
         counter.textContent = `${current + 1} / ${total}`;
         thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
         if (thumbs[current]) thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
 
-    /* Programmatic navigation — uses native scroll so iOS momentum stays intact */
-    function goTo(idx) {
-        const next = (idx + total) % total;
-        viewport.scrollTo({ left: next * viewport.offsetWidth, behavior: 'smooth' });
-        syncUI(next);
-    }
-
-    /* Sync state when user swipes natively */
-    let scrollTimer;
-    viewport.addEventListener('scroll', () => {
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(() => {
-            const idx = Math.round(viewport.scrollLeft / viewport.offsetWidth);
-            if (idx !== current && idx >= 0 && idx < total) syncUI(idx);
-        }, 80);
-    }, { passive: true });
-
-    requestAnimationFrame(() => {
-        fixSlideWidths();
-        viewport.scrollLeft = 0;
-    });
+    requestAnimationFrame(() => { fixSlideWidths(); goTo(0); });
 
     window.addEventListener('resize', () => {
         fixSlideWidths();
-        viewport.scrollLeft = current * viewport.offsetWidth;
+        track.style.transition = 'none';
+        track.style.transform = `translateX(-${current * viewport.offsetWidth}px)`;
+        requestAnimationFrame(() => { track.style.transition = ''; });
     }, { passive: true });
 
     prevBtn.addEventListener('click', () => goTo(current - 1));
