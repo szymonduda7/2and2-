@@ -612,6 +612,7 @@ section {
     height: 100%;
     transition: transform 0.45s var(--ease);
     will-change: transform;
+    touch-action: pan-y;
 }
 
 .gallery__slide {
@@ -803,6 +804,7 @@ section {
     display: flex;
     transition: transform 0.45s var(--ease);
     will-change: transform;
+    touch-action: pan-y;
 }
 
 .films__slide {
@@ -979,6 +981,7 @@ section {
 .reviews__track {
     display: flex;
     transition: transform 0.5s var(--ease);
+    touch-action: pan-y;
 }
 
 .review-card {

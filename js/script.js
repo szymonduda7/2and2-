@@ -92,13 +92,23 @@ nextBtn.addEventListener('click', next);
 prevBtn.addEventListener('click', prev);
 
 /* Touch / swipe support */
-let touchStartX = 0;
+let touchStartX = 0, touchStartY = 0, reviewsHorizLocked = false;
 track.addEventListener('touchstart', e => {
     touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
+    reviewsHorizLocked = false;
 }, { passive: true });
+track.addEventListener('touchmove', e => {
+    const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+    const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+    if (!reviewsHorizLocked && dx > dy && dx > 5) reviewsHorizLocked = true;
+    if (reviewsHorizLocked) e.preventDefault();
+}, { passive: false });
 track.addEventListener('touchend', e => {
+    if (!reviewsHorizLocked) return;
     const delta = touchStartX - e.changedTouches[0].clientX;
     if (Math.abs(delta) > 40) delta > 0 ? next() : prev();
+    reviewsHorizLocked = false;
 });
 
 /* Auto-advance */
@@ -235,11 +245,23 @@ sections.forEach(s => navObserver.observe(s));
     thumbs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
 
     /* Touch / swipe */
-    let tx = 0;
-    track.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+    let tx = 0, ty = 0, gallHorizLocked = false;
+    track.addEventListener('touchstart', e => {
+        tx = e.changedTouches[0].clientX;
+        ty = e.changedTouches[0].clientY;
+        gallHorizLocked = false;
+    }, { passive: true });
+    track.addEventListener('touchmove', e => {
+        const dx = Math.abs(e.changedTouches[0].clientX - tx);
+        const dy = Math.abs(e.changedTouches[0].clientY - ty);
+        if (!gallHorizLocked && dx > dy && dx > 5) gallHorizLocked = true;
+        if (gallHorizLocked) e.preventDefault();
+    }, { passive: false });
     track.addEventListener('touchend', e => {
+        if (!gallHorizLocked) return;
         const d = tx - e.changedTouches[0].clientX;
         if (Math.abs(d) > 40) d > 0 ? goTo(current + 1) : goTo(current - 1);
+        gallHorizLocked = false;
     });
 
     /* Keyboard (only when not in a form field) */
@@ -311,11 +333,23 @@ sections.forEach(s => navObserver.observe(s));
     nextBtn.addEventListener('click', () => goTo(current + 1));
 
     /* Touch / swipe */
-    let tx = 0;
-    track.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+    let tx = 0, ty = 0, filmsHorizLocked = false;
+    track.addEventListener('touchstart', e => {
+        tx = e.changedTouches[0].clientX;
+        ty = e.changedTouches[0].clientY;
+        filmsHorizLocked = false;
+    }, { passive: true });
+    track.addEventListener('touchmove', e => {
+        const dx = Math.abs(e.changedTouches[0].clientX - tx);
+        const dy = Math.abs(e.changedTouches[0].clientY - ty);
+        if (!filmsHorizLocked && dx > dy && dx > 5) filmsHorizLocked = true;
+        if (filmsHorizLocked) e.preventDefault();
+    }, { passive: false });
     track.addEventListener('touchend', e => {
+        if (!filmsHorizLocked) return;
         const d = tx - e.changedTouches[0].clientX;
         if (Math.abs(d) > 40) d > 0 ? goTo(current + 1) : goTo(current - 1);
+        filmsHorizLocked = false;
     });
 
     /* Play / Pause buttons (delegated) */
