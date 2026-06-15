@@ -199,20 +199,34 @@ sections.forEach(s => navObserver.observe(s));
     /* Init counter */
     counter.textContent = `1 / ${total}`;
 
-    function slideWidth() { return viewport.offsetWidth; }
+    /* Set every slide to exact pixel width — bypasses iOS Safari flex-basis % bug */
+    function fixSlideWidths() {
+        const w = viewport.offsetWidth;
+        slides.forEach(s => {
+            s.style.width    = w + 'px';
+            s.style.minWidth = w + 'px';
+        });
+    }
 
     function goTo(idx) {
         current = (idx + total) % total;
-        track.style.transform = `translateX(-${current * slideWidth()}px)`;
+        track.style.transform = `translateX(-${current * viewport.offsetWidth}px)`;
         counter.textContent = `${current + 1} / ${total}`;
         thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
         thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
 
-    /* Recalculate position on resize (orientation change on iOS) */
+    /* Run after first paint so offsetWidth is reliable */
+    requestAnimationFrame(() => {
+        fixSlideWidths();
+        goTo(0);
+    });
+
+    /* Recompute on orientation change / resize */
     window.addEventListener('resize', () => {
+        fixSlideWidths();
         track.style.transition = 'none';
-        track.style.transform = `translateX(-${current * slideWidth()}px)`;
+        goTo(current);
         requestAnimationFrame(() => { track.style.transition = ''; });
     }, { passive: true });
 
