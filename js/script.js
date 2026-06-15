@@ -221,7 +221,13 @@ sections.forEach(s => navObserver.observe(s));
         if (thumbs[current]) thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
 
-    requestAnimationFrame(() => { fixSlideWidths(); goTo(0); });
+    requestAnimationFrame(() => {
+        fixSlideWidths();
+        /* Init without scrollIntoView — prevents page jumping to gallery on load */
+        track.style.transform = 'translateX(0)';
+        counter.textContent = `1 / ${total}`;
+        thumbs[0].classList.add('active');
+    });
 
     window.addEventListener('resize', () => {
         fixSlideWidths();
