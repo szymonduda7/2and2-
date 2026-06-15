@@ -186,6 +186,7 @@ sections.forEach(s => navObserver.observe(s));
     const track   = document.getElementById('galleryTrack');
     if (!track) return;
 
+    const viewport = track.parentElement;
     const slides   = track.querySelectorAll('.gallery__slide');
     const total    = slides.length;
     const thumbsEl = document.getElementById('galleryThumbs');
@@ -198,13 +199,22 @@ sections.forEach(s => navObserver.observe(s));
     /* Init counter */
     counter.textContent = `1 / ${total}`;
 
+    function slideWidth() { return viewport.offsetWidth; }
+
     function goTo(idx) {
         current = (idx + total) % total;
-        track.style.transform = `translateX(-${current * 100}%)`;
+        track.style.transform = `translateX(-${current * slideWidth()}px)`;
         counter.textContent = `${current + 1} / ${total}`;
         thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
         thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
+
+    /* Recalculate position on resize (orientation change on iOS) */
+    window.addEventListener('resize', () => {
+        track.style.transition = 'none';
+        track.style.transform = `translateX(-${current * slideWidth()}px)`;
+        requestAnimationFrame(() => { track.style.transition = ''; });
+    }, { passive: true });
 
     prevBtn.addEventListener('click', () => goTo(current - 1));
     nextBtn.addEventListener('click', () => goTo(current + 1));
