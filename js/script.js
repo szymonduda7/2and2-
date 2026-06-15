@@ -206,65 +206,52 @@ sections.forEach(s => navObserver.observe(s));
     const nextBtn  = document.getElementById('gallNext');
     let current    = 0;
 
-    /* Init counter */
     counter.textContent = `1 / ${total}`;
 
-    /* Set every slide to exact pixel width — bypasses iOS Safari flex-basis % bug */
+    /* Pixel widths on slides — bypasses iOS flex-basis % ambiguity */
     function fixSlideWidths() {
         const w = viewport.offsetWidth;
-        slides.forEach(s => {
-            s.style.width    = w + 'px';
-            s.style.minWidth = w + 'px';
-        });
+        slides.forEach(s => { s.style.width = w + 'px'; s.style.minWidth = w + 'px'; });
     }
 
-    function goTo(idx) {
-        current = (idx + total) % total;
-        track.style.transform = `translateX(-${current * viewport.offsetWidth}px)`;
+    function syncUI(idx) {
+        current = idx;
         counter.textContent = `${current + 1} / ${total}`;
         thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
-        thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        if (thumbs[current]) thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
 
-    /* Run after first paint so offsetWidth is reliable */
+    /* Programmatic navigation — uses native scroll so iOS momentum stays intact */
+    function goTo(idx) {
+        const next = (idx + total) % total;
+        viewport.scrollTo({ left: next * viewport.offsetWidth, behavior: 'smooth' });
+        syncUI(next);
+    }
+
+    /* Sync state when user swipes natively */
+    let scrollTimer;
+    viewport.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+            const idx = Math.round(viewport.scrollLeft / viewport.offsetWidth);
+            if (idx !== current && idx >= 0 && idx < total) syncUI(idx);
+        }, 80);
+    }, { passive: true });
+
     requestAnimationFrame(() => {
         fixSlideWidths();
-        goTo(0);
+        viewport.scrollLeft = 0;
     });
 
-    /* Recompute on orientation change / resize */
     window.addEventListener('resize', () => {
         fixSlideWidths();
-        track.style.transition = 'none';
-        goTo(current);
-        requestAnimationFrame(() => { track.style.transition = ''; });
+        viewport.scrollLeft = current * viewport.offsetWidth;
     }, { passive: true });
 
     prevBtn.addEventListener('click', () => goTo(current - 1));
     nextBtn.addEventListener('click', () => goTo(current + 1));
     thumbs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
 
-    /* Touch / swipe */
-    let tx = 0, ty = 0, gallHorizLocked = false;
-    track.addEventListener('touchstart', e => {
-        tx = e.changedTouches[0].clientX;
-        ty = e.changedTouches[0].clientY;
-        gallHorizLocked = false;
-    }, { passive: true });
-    track.addEventListener('touchmove', e => {
-        const dx = Math.abs(e.changedTouches[0].clientX - tx);
-        const dy = Math.abs(e.changedTouches[0].clientY - ty);
-        if (!gallHorizLocked && dx > dy && dx > 5) gallHorizLocked = true;
-        if (gallHorizLocked) e.preventDefault();
-    }, { passive: false });
-    track.addEventListener('touchend', e => {
-        if (!gallHorizLocked) return;
-        const d = tx - e.changedTouches[0].clientX;
-        if (Math.abs(d) > 40) d > 0 ? goTo(current + 1) : goTo(current - 1);
-        gallHorizLocked = false;
-    });
-
-    /* Keyboard (only when not in a form field) */
     document.addEventListener('keydown', e => {
         if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
         if (e.key === 'ArrowLeft')  goTo(current - 1);
