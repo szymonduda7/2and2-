@@ -123,39 +123,6 @@ const carouselWrap = document.querySelector('.reviews__carousel-wrap');
 carouselWrap.addEventListener('mouseenter', () => clearInterval(autoTimer));
 carouselWrap.addEventListener('mouseleave', resetTimer);
 
-/* ========================
-   CONTACT FORM
-======================== */
-const contactForm = document.getElementById('contactForm');
-const formSuccess = document.getElementById('formSuccess');
-
-contactForm.addEventListener('submit', e => {
-    e.preventDefault();
-
-    const name    = contactForm.name.value.trim();
-    const phone   = contactForm.phone.value.trim();
-    const message = contactForm.message.value.trim();
-
-    if (!name || !phone || !message) {
-        /* Mark empty fields */
-        [['name', name], ['phone', phone], ['message', message]].forEach(([id, val]) => {
-            const el = document.getElementById(id);
-            el.style.borderColor = val ? '' : '#e53e3e';
-            el.addEventListener('input', () => { el.style.borderColor = ''; }, { once: true });
-        });
-        return;
-    }
-
-    /* Simulate send — replace with real fetch/form action when backend is ready */
-    const submitBtn = contactForm.querySelector('[type="submit"]');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Wysyłanie…';
-
-    setTimeout(() => {
-        contactForm.hidden = true;
-        formSuccess.hidden = false;
-    }, 800);
-});
 
 /* ========================
    SMOOTH ANCHOR SCROLL (fallback for older browsers)
@@ -239,6 +206,26 @@ sections.forEach(s => navObserver.observe(s));
     prevBtn.addEventListener('click', () => goTo(current - 1));
     nextBtn.addEventListener('click', () => goTo(current + 1));
     thumbs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
+
+    /* Touch / swipe */
+    let gx = 0, gy = 0, gallHorizLocked = false;
+    viewport.addEventListener('touchstart', e => {
+        gx = e.changedTouches[0].clientX;
+        gy = e.changedTouches[0].clientY;
+        gallHorizLocked = false;
+    }, { passive: true });
+    viewport.addEventListener('touchmove', e => {
+        const dx = Math.abs(e.changedTouches[0].clientX - gx);
+        const dy = Math.abs(e.changedTouches[0].clientY - gy);
+        if (!gallHorizLocked && dx > dy && dx > 5) gallHorizLocked = true;
+        if (gallHorizLocked) e.preventDefault();
+    }, { passive: false });
+    viewport.addEventListener('touchend', e => {
+        if (!gallHorizLocked) return;
+        const d = gx - e.changedTouches[0].clientX;
+        if (Math.abs(d) > 40) d > 0 ? goTo(current + 1) : goTo(current - 1);
+        gallHorizLocked = false;
+    });
 
     document.addEventListener('keydown', e => {
         if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
