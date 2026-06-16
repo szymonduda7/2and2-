@@ -20,7 +20,9 @@
     <!-- SEO: canonical (update domain before going live) -->
     <link rel="canonical" href="https://ssmeble.pl/" />
 
-    <!-- SEO: favicon (place favicon.ico in root directory) -->
+    <!-- SEO: favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
 
@@ -41,6 +43,15 @@
       property="og:image"
       content="https://ssmeble.pl/images/realizacje/22.jpg"
     />
+    <meta property="og:image:width" content="382" />
+    <meta property="og:image:height" content="510" />
+    <meta property="og:image:alt" content="Meble na wymiar Szczecin — realizacja S&S Meble" />
+
+    <!-- SEO: Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="S&S Meble na Wymiar Szczecin | Kuchnie, Szafy, Zabudowy" />
+    <meta name="twitter:description" content="Producent mebli na wymiar w Szczecinie. Kuchnie, szafy wnękowe, zabudowy łazienkowe. Bezpłatna wycena. Zadzwoń: 790 030 975" />
+    <meta name="twitter:image" content="https://ssmeble.pl/images/realizacje/22.jpg" />
 
     <!-- Performance: preconnect Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -56,11 +67,18 @@
       {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
+        "@id": "https://ssmeble.pl/#business",
         "name": "S&S Meble na wymiar",
         "url": "https://ssmeble.pl/",
+        "image": "https://ssmeble.pl/images/realizacje/22.jpg",
         "description": "Producent mebli na wymiar w Szczecinie. Kuchnie na wymiar, szafy wnękowe, zabudowy łazienkowe i meble biurowe.",
         "telephone": "+48790030975",
         "priceRange": "zł zł",
+        "areaServed": {
+          "@type": "GeoCircle",
+          "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 53.4285, "longitude": 14.5528 },
+          "geoRadius": "60000"
+        },
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Szczecin",
@@ -190,7 +208,6 @@
           <a href="#filmy" class="navbar__link">Filmy</a>
           <a href="#uslugi" class="navbar__link">Usługi</a>
           <a href="#faq" class="navbar__link">FAQ</a>
-          <a href="#kontakt" class="navbar__link">Kontakt</a>
         </nav>
 
         <a href="tel:790030975" class="btn btn--orange navbar__cta">
@@ -259,7 +276,7 @@
               <a href="#realizacje" class="btn btn--orange btn--lg"
                 >Zobacz realizacje</a
               >
-              <a href="#kontakt" class="btn btn--outline btn--lg"
+              <a href="tel:790030975" class="btn btn--outline btn--lg"
                 >Bezpłatna wycena</a
               >
             </div>
@@ -426,7 +443,7 @@
                 Kuchnie zaprojektowane od podstaw — dopasowane do Twojej
                 przestrzeni, stylu i budżetu.
               </p>
-              <a href="#kontakt" class="service-card__link"
+              <a href="tel:790030975" class="service-card__link"
                 >Zapytaj o wycenę →</a
               >
             </div>
@@ -453,7 +470,7 @@
                 Szafy na wymiar, które maksymalnie wykorzystują przestrzeń i
                 harmonijnie wpisują się w wnętrze.
               </p>
-              <a href="#kontakt" class="service-card__link"
+              <a href="tel:790030975" class="service-card__link"
                 >Zapytaj o wycenę →</a
               >
             </div>
@@ -481,7 +498,7 @@
                 Funkcjonalne meble łazienkowe wykonane z materiałów odpornych na
                 wilgoć i parę wodną.
               </p>
-              <a href="#kontakt" class="service-card__link"
+              <a href="tel:790030975" class="service-card__link"
                 >Zapytaj o wycenę →</a
               >
             </div>
@@ -510,7 +527,7 @@
                 Ergonomiczne biurka, regały i zabudowy biurowe, które zwiększają
                 produktywność i estetykę przestrzeni.
               </p>
-              <a href="#kontakt" class="service-card__link"
+              <a href="tel:790030975" class="service-card__link"
                 >Zapytaj o wycenę →</a
               >
             </div>
@@ -799,217 +816,217 @@
                 <button
                   class="gallery__thumb active"
                   data-index="0"
-                  aria-label="Zdjęcie 1"
+                  aria-label="Szafa wnękowa na wymiar Szczecin — S&S Meble"
                 >
                   <img src="images/realizacje/1.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="1"
-                  aria-label="Zdjęcie 2"
+                  aria-label="Kuchnia na wymiar Szczecin — S&S Meble"
                 >
                   <img src="images/realizacje/2.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="2"
-                  aria-label="Zdjęcie 3"
+                  aria-label="Zabudowa łazienkowa na wymiar Szczecin — S&S Meble"
                 >
                   <img src="images/realizacje/3.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="3"
-                  aria-label="Zdjęcie 4"
+                  aria-label="Szafa wnękowa Szczecin — meble na wymiar S&S"
                 >
                   <img src="images/realizacje/4.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="4"
-                  aria-label="Zdjęcie 5"
+                  aria-label="Meble kuchenne na wymiar Szczecin — S&S Meble"
                 >
                   <img src="images/realizacje/5.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="5"
-                  aria-label="Zdjęcie 6"
+                  aria-label="Zabudowa biurowa na wymiar Szczecin — S&S Meble"
                 >
                   <img src="images/realizacje/6.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="6"
-                  aria-label="Zdjęcie 7"
+                  aria-label="Kuchnia na wymiar — realizacja S&S Meble Szczecin"
                 >
                   <img src="images/realizacje/7.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="7"
-                  aria-label="Zdjęcie 8"
+                  aria-label="Szafa wnękowa na wymiar — S&S Meble Szczecin"
                 >
                   <img src="images/realizacje/8.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="8"
-                  aria-label="Zdjęcie 9"
+                  aria-label="Zabudowa łazienkowa Szczecin — meble na wymiar S&S"
                 >
                   <img src="images/realizacje/9.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="9"
-                  aria-label="Zdjęcie 10"
+                  aria-label="Kuchnia na wymiar Szczecin — projekt i realizacja S&S Meble"
                 >
                   <img src="images/realizacje/10.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="10"
-                  aria-label="Zdjęcie 11"
+                  aria-label="Szafa wnękowa — meble na wymiar Szczecin S&S"
                 >
                   <img src="images/realizacje/11.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="11"
-                  aria-label="Zdjęcie 12"
+                  aria-label="Meble łazienkowe na wymiar — S&S Meble Szczecin"
                 >
                   <img src="images/realizacje/12.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="12"
-                  aria-label="Zdjęcie 13"
+                  aria-label="Kuchnia na wymiar — S&S Meble Szczecin realizacja"
                 >
                   <img src="images/realizacje/13.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="13"
-                  aria-label="Zdjęcie 14"
+                  aria-label="Szafa wnękowa na wymiar Szczecin — realizacja S&S"
                 >
                   <img src="images/realizacje/14.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="14"
-                  aria-label="Zdjęcie 15"
+                  aria-label="Meble biurowe na wymiar Szczecin — S&S Meble"
                 >
                   <img src="images/realizacje/15.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="15"
-                  aria-label="Zdjęcie 16"
+                  aria-label="Kuchnia na wymiar Szczecin — S&S Meble projekt"
                 >
                   <img src="images/realizacje/16.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="16"
-                  aria-label="Zdjęcie 17"
+                  aria-label="Zabudowa łazienkowa na wymiar — S&S Meble Szczecin"
                 >
                   <img src="images/realizacje/17.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="17"
-                  aria-label="Zdjęcie 18"
+                  aria-label="Szafa wnękowa Szczecin — realizacja meble na wymiar S&S"
                 >
                   <img src="images/realizacje/18.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="18"
-                  aria-label="Zdjęcie 19"
+                  aria-label="Meble kuchenne Szczecin — S&S Meble na wymiar"
                 >
                   <img src="images/realizacje/19.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="19"
-                  aria-label="Zdjęcie 20"
+                  aria-label="Kuchnia na wymiar — projekt S&S Meble Szczecin"
                 >
                   <img src="images/realizacje/20.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="20"
-                  aria-label="Zdjęcie 21"
+                  aria-label="Szafa wnękowa na wymiar — realizacja S&S Meble"
                 >
                   <img src="images/realizacje/21.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="21"
-                  aria-label="Zdjęcie 22"
+                  aria-label="Meble na wymiar Szczecin — realizacja S&S"
                 >
                   <img src="images/realizacje/22.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="22"
-                  aria-label="Zdjęcie 23"
+                  aria-label="Kuchnia na wymiar Szczecin — zabudowa S&S Meble"
                 >
                   <img src="images/realizacje/23.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="23"
-                  aria-label="Zdjęcie 24"
+                  aria-label="Szafa wnękowa na wymiar Szczecin — S&S Meble"
                 >
                   <img src="images/realizacje/24.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="24"
-                  aria-label="Zdjęcie 25"
+                  aria-label="Kuchnia na wymiar — S&S Meble Szczecin"
                 >
                   <img src="images/realizacje/25.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="25"
-                  aria-label="Zdjęcie 26"
+                  aria-label="Zabudowa łazienkowa Szczecin — S&S Meble na wymiar"
                 >
                   <img src="images/realizacje/26.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="26"
-                  aria-label="Zdjęcie 27"
+                  aria-label="Meble kuchenne na wymiar — S&S Meble Szczecin"
                 >
                   <img src="images/realizacje/27.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="27"
-                  aria-label="Zdjęcie 28"
+                  aria-label="Szafa wnękowa — S&S Meble Szczecin na wymiar"
                 >
                   <img src="images/realizacje/28.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="28"
-                  aria-label="Zdjęcie 29"
+                  aria-label="Kuchnia na wymiar Szczecin — realizacja S&S Meble"
                 >
                   <img src="images/realizacje/29.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="29"
-                  aria-label="Zdjęcie 30"
+                  aria-label="Meble na wymiar — realizacja S&S Szczecin"
                 >
                   <img src="images/realizacje/30.jpg" alt="" loading="lazy" />
                 </button>
                 <button
                   class="gallery__thumb"
                   data-index="30"
-                  aria-label="Zdjęcie 31"
+                  aria-label="Szafa wnękowa na wymiar — S&S Meble Szczecin"
                 >
                   <img src="images/realizacje/31.jpg" alt="" loading="lazy" />
                 </button>
@@ -1275,7 +1292,7 @@
         </div>
       </section>
 
-      <!-- KONTAKT -->
+      <!-- KONTAKT (tymczasowo ukryty)
       <section class="contact" id="kontakt">
         <div class="container">
           <div class="section-header">
@@ -1471,7 +1488,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
 
       <!-- FAQ — AEO: Answer Engine Optimization -->
       <section class="faq" id="faq" aria-label="Najczęstsze pytania">
