@@ -261,7 +261,6 @@ sections.forEach(s => navObserver.observe(s));
     const nextBtn  = document.getElementById('filmNext');
     let current    = 0;
 
-    /* Build dots */
     const dots = Array.from({ length: total }, (_, i) => {
         const btn = document.createElement('button');
         btn.className = 'film-dot' + (i === 0 ? ' active' : '');

@@ -831,6 +831,7 @@ section {
     display: block;
 }
 
+
 /* Placeholder dark screen */
 .films__ph {
     width: 100%;
@@ -1436,4 +1437,97 @@ section {
     .films__layout { gap: 0.5rem; }
     .films__viewport { width: calc(100vw - 7rem); }
     .films__arrow { width: 36px; height: 36px; }
+}
+
+/* ========================
+   FAQ
+======================== */
+.faq {
+    padding: 5rem 0;
+    background: var(--light-gray);
+}
+
+.faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq__item {
+    background: var(--white);
+    border-radius: var(--radius-m);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow var(--dur) var(--ease);
+}
+
+.faq__item[open] {
+    box-shadow: var(--shadow-md);
+}
+
+.faq__question {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-main);
+    cursor: pointer;
+    user-select: none;
+}
+
+.faq__question::-webkit-details-marker { display: none; }
+
+.faq__question::after {
+    content: '+';
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--orange);
+    flex-shrink: 0;
+    line-height: 1;
+    transition: transform var(--dur) var(--ease);
+}
+
+.faq__item[open] .faq__question::after {
+    transform: rotate(45deg);
+}
+
+.faq__answer {
+    padding: 0 1.5rem 1.25rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    font-size: 0.95rem;
+}
+
+.faq__answer a {
+    color: var(--orange);
+    text-decoration: none;
+}
+
+.faq__answer a:hover {
+    text-decoration: underline;
+}
+
+/* Footer address */
+.footer__address {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-style: normal;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.footer__address a {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+@media (max-width: 480px) {
+    .faq__question { font-size: 0.92rem; padding: 1rem 1.25rem; }
+    .faq__answer { padding: 0 1.25rem 1rem; }
 }
